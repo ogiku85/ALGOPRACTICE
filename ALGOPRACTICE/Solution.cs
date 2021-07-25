@@ -528,5 +528,92 @@ namespace ALGOPRACTICE
             }
             return lenghtOfLongestConsecutiveSequence;
         }
+        public void Merge(int[] nums1, int m, int[] nums2, int n)
+        {
+            try
+            {
+                // nums1 contains m element and n spaces or zeros technically it is of lenght m + n
+                //in order to merge the two arrays in place we can start from thei end values and overwrite
+                //nums1 from the end which will initially contain zeros. so intead of starting our merge in ascending order
+                //i.e smallest numbers first we are actaully starting with the biggest numbers first
+
+                int currentArrayOneEndIndex = m - 1;
+                int currentArrayTwoEndIndex = n - 1;
+
+                int currentArrayOnewWriteIndex = m + n - 1;
+
+                for (int i = currentArrayOnewWriteIndex; i >= 0; i--)
+                {
+                    //it is expected that we may get to the end of the sceond array since it is smaller than the first array
+                    //so we check and exist the loop once the second array values have been compared and writtern into the first array
+                    if (currentArrayTwoEndIndex < 0)
+                    {
+                        break;
+                    }
+                    if (nums1[currentArrayOneEndIndex] > nums2[currentArrayTwoEndIndex])
+                    {
+                        // if value in array 1 is greater then insert into the current write location and decrement to the next spot before
+                        //the next while loop iteration
+                        nums1[i] = nums1[currentArrayOneEndIndex];
+                        currentArrayOneEndIndex--;
+                    }
+                    else
+                    {
+                        //value in array 2 is greater so we insert and deceremnt pointers accordingly
+                        nums1[i] = nums2[currentArrayTwoEndIndex];
+                        currentArrayTwoEndIndex--;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+        public int[] TwoSum(int[] nums, int target)
+        {
+            int[] result = null;
+            try
+            {
+                if(nums == null || nums.Length <= 0)
+                {
+                    return null;
+                }
+                //to do without extra space we sort the array and use two pointers to get the required some
+                //but this will fail on leetcode becasue sort changes the original index of some of the answers
+                Array.Sort(nums);
+
+                int leftIndex = 0;
+                int rightIndex = nums.Length - 1;
+                while(leftIndex < rightIndex)
+                {
+                    int leftElement = nums[leftIndex];
+                    int rightElement = nums[rightIndex];
+                    if (leftElement + rightElement == target )
+                    {
+                        result = new int[] { leftIndex, rightIndex };
+                        return result;
+                    }
+                    else if (leftElement + rightElement < target)
+                    {
+                        // we need to move the left index towards the right to get a bigger result
+                        leftIndex++;
+                    }
+                    else
+                    {
+                        //we need to move the right index to the left so that we get a smaller number. ALl this is possible
+                        //beacuse we sorted the array earlier
+                        rightIndex--;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+            return result;
+        }
     }
 }

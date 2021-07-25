@@ -92,6 +92,21 @@ namespace ALGOPRACTICE
             //        }
             //    }
             //}
+
+            //var nums = new int[] { 2, 5, 1, 3, 4 };
+            //int inversionCount = 0;
+            //var countingInversion = new CountingInversion();
+            //var result = countingInversion.SortArrayAndCountingInversion(nums);
+            //var soretdArray = result.Item1;
+            //var countOfInversion = result.Item2;
+            //var nums = new int[] { 5, 2, 3, 1 };
+            //var quick = new MyQuickSort();
+            //var result = quick.QuickSort(nums);
+
+            var nums = new int[] { 2, 7, 11, 15 };
+            var sol = new Solution();
+            int target = 9;
+            sol.TwoSum(nums, target);
         }
     }
 }
